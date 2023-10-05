@@ -8,9 +8,9 @@
 <body>
 <jsp:include page="../layout/header.jsp" flush="false" />
 
-<form id="regFrm" action="boardList.jsp" method="post" enctype="multipart/form-data">
+<form id="AddFrm" action="/board/add" method="post" enctype="multipart/form-data">
 
-  <div class="form-group"><label class="control-label">제목<input type="text" name="memberId" class="form-control" minlength="5" maxlength="15"></label></div>
+  <div class="form-group"><label class="control-label">제목<input type="text" name="title" class="form-control" minlength="5" maxlength="15"></label></div>
 
   <div class="form-group "><label class="control-label"><textarea name="content" rows="45" cols="100" maxlength="1000" minlength="10">내용을 입력하세요.</textarea></label></div>
 
@@ -19,6 +19,7 @@
     <label class="control-label"><input type="submit" value="등록"></label>
 </form>
 <jsp:include page="../layout/footer.jsp" flush="false" />
+
 </body>
 </html>
 

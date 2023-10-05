@@ -14,8 +14,8 @@ import java.util.List;
 public class RippleDAO {
 
     //댓글 등록
-    public boolean insertRipple(RippleDTO rippleDTO) throws Exception{
-        String sql = "INSERT INTO ripple VALUES(null, ?, ?, ?, ?, now(), ?)";
+    public int insertRipple(RippleDTO rippleDTO) throws Exception{
+        String sql = "INSERT INTO ripple (`boardNum`, `memberId`, `name`, `content`,`insertDate`, `ip`)VALUES(?, ?, ?, ?, now(), ?)";
         @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
         @Cleanup PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
@@ -25,8 +25,8 @@ public class RippleDAO {
         preparedStatement.setString(4, rippleDTO.getContent());
         preparedStatement.setString(5, rippleDTO.getIp());
 
-        preparedStatement.executeUpdate();
-        return false;
+
+        return preparedStatement.executeUpdate();
     }
 
     //댓글 목록 출력
@@ -40,6 +40,7 @@ public class RippleDAO {
         @Cleanup ResultSet resultSet = preparedStatement.executeQuery();
         while (resultSet.next()){
             RippleDTO rippleDTO = RippleDTO.builder()
+                    .boardNum(resultSet.getInt("boardNum"))
                     .rippleId(resultSet.getInt("rippleId"))
                     .memberId(resultSet.getString("memberId"))
                     .name(resultSet.getString("name"))

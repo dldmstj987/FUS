@@ -89,12 +89,20 @@ public class BoardDAO {
         return null;
     }
 
-//    /*글쓰기에서 게시글 추가하는 메서드*/
-//    public BoardDTO boardAdd(BoardDTO boardDTO) throws SQLException {
-//        @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
-//
-//        String sql = "";
-//    }
+    /*글쓰기에서 게시글 추가하는 메서드*/
+    public int boardAdd(BoardDTO boardDTO) throws SQLException {
+        @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
+
+        String sql = "INSERT INTO board(memberId, title, name, content, fileName ) VALUES(?, ?, ?, ?, ?)";
+        @Cleanup PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1, boardDTO.getMemberId());
+        preparedStatement.setString(2, boardDTO.getTitle());
+        preparedStatement.setString(3, boardDTO.getName());
+        preparedStatement.setString(4, boardDTO.getContent());
+        preparedStatement.setString(5, boardDTO.getFileName());
+
+        return preparedStatement.executeUpdate();
+    }
 
 
 

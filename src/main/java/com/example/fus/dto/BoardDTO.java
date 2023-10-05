@@ -16,4 +16,5 @@ public class BoardDTO {
     private String content; //게시글 내용
     private String addDate; //게시글 날짜
     private String fileName; //파일
+    private String memberId; //멤버 아이디
 }

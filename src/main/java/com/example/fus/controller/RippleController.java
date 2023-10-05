@@ -40,6 +40,11 @@ public class RippleController extends HttpServlet {
 
         if(path == null){
             path = "/list";
+            try{
+                req.getRequestDispatcher("/WEB-INF/board/boardList.jsp").forward(req, resp);
+            } catch (Exception e){
+                e.printStackTrace();
+            }
         }
 
         switch (path){
@@ -48,7 +53,7 @@ public class RippleController extends HttpServlet {
                     JSONObject jsonObject = new JSONObject(); //JSON 정보를 담기 위해 객체를 생성
 
                     //성공, 실패의 결과를 JSON에 저장.
-                    if (rippleService.addRipple(req)){
+                    if (rippleService.addRipple(req) == 1){
                         jsonObject.put("result", "true");
                     } else {
                         jsonObject.put("result", "false");
@@ -64,6 +69,7 @@ public class RippleController extends HttpServlet {
                     List<RippleDTO> rippleDTOS = rippleService.getRipples(req);
                     //collection list를 json으로 변환.
                     JSONArray jsonArray = new JSONArray(); //목록을 저장해야 하기 때문에 JSONArray()를 사용
+                    log.info(jsonArray);
                     for (RippleDTO rippleDTO : rippleDTOS) {
                         JSONObject jsonObject = new JSONObject();
                         jsonObject.put("rippleId", rippleDTO.getRippleId());
@@ -94,7 +100,7 @@ public class RippleController extends HttpServlet {
                 break;
             case "/view":
                 try{
-                    req.getRequestDispatcher("/WEB-INF/board/view.jsp").forward(req, resp);
+                    req.getRequestDispatcher("/WEB-INF/board/boardView.jsp").forward(req, resp);
                 } catch (Exception e){
                     e.printStackTrace();
                 }

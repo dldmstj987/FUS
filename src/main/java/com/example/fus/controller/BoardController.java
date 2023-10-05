@@ -15,7 +15,7 @@ import java.util.List;
 
 @Log4j2
 @WebServlet("/board/*")
-@MultipartConfig(maxFileSize = 2 * 1024 * 1024, location ="c:/upload/board" )
+@MultipartConfig(maxFileSize = 2 * 1024 * 1024, location ="/Users/ieunseo/Desktop/dev/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/webapps/upload" )
 public class BoardController extends HttpServlet {
     private BoardService boardService = null;
     private String path = null;
@@ -73,19 +73,20 @@ public class BoardController extends HttpServlet {
                 req.getRequestDispatcher("/WEB-INF/board/boardList.jsp").forward(req, resp);
                 break;
 
-            case "add":
-                boardService.addBoard(req);
-                resp.sendRedirect("list.board?action=list");
+            case "/add":
+                boardService.boardAdd(req);
+                resp.sendRedirect("/board/all");
                 break;
 
-            case "remove":
+            case "/remove":
                 boardService.removeBoard(req);
                 resp.sendRedirect("list.board?action=list");
                 break;
 
-            case "view":
+            case "/view":
                 boardService.getBoard(req);
                 req.getRequestDispatcher("/WEB-INF/board/boardView.jsp").forward(req, resp);
+                break;
 
 
         }

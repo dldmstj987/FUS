@@ -19,15 +19,6 @@ public class BoardServiceTests {
                 .build();
     }
 
-    @Test
-    public void testBoardAdd() throws Exception{
-        BoardDTO boardDTO = BoardDTO.builder()
-                .title("항저우 아시안 게임")
-                .name("강인아 가자")
-                .content("이번 항정우 좀 괜찮았음")
-                .fileName("이강인.jpg")
-                .build();
 
-    }
 
 }
